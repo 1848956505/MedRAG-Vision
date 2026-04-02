@@ -1,0 +1,26 @@
+[Unit]
+Description=Gunicorn instance to serve Health Assistant
+After=network.target
+
+[Service]
+# 运行用户 (根据实际情况修改，如 root 或 ubuntu)
+User=ubuntu
+Group=www-data
+
+# 项目根目录
+WorkingDirectory=/home/ubuntu/HealthAssistant
+
+# 环境变量 (显卡可见性)
+Environment="PATH=/home/ubuntu/HealthAssistant/venv/bin"
+Environment="CUDA_VISIBLE_DEVICES=0"
+Environment="HF_HUB_ENABLE_HF_TRANSFER=1"
+
+# 启动命令 (指向 gunicorn 配置文件)
+ExecStart=/home/ubuntu/HealthAssistant/venv/bin/gunicorn -c gunicorn_conf.py wsgi:app
+
+# 自动重启策略
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
