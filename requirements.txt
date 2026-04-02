@@ -1,0 +1,13 @@
+flask
+torch
+transformers
+accelerate
+sentence-transformers
+faiss-cpu
+rank_bm25
+pillow
+numpy
+unsloth
+peft
+bitsandbytes
+python-dotenv
